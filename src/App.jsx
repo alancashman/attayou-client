@@ -8,8 +8,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" component={Welcome} />
-        <Route path="/habits" component={Habits} />
+        <Route path="/" element={<Welcome />}></Route>
+        <Route path="/habits" element={<Habits />}></Route>
       </Routes>
     </BrowserRouter>
   );
