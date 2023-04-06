@@ -52,7 +52,7 @@ function Habits() {
   }
 
   return (
-    <>
+    <section className="habits__section">
       <Calendar
         value={date}
         onChange={onCalendarChange}
@@ -79,7 +79,7 @@ function Habits() {
 
         <NewHabit habits={habits} setHabits={setHabits} />
       </div>
-    </>
+    </section>
   );
 }
 

@@ -60,7 +60,7 @@ export default function Habit({
 
   function deleteHandler() {
     const habit = habits.find((habit) => habit.id === id);
-    console.log(habit);
+    console.log("habit: ", habit);
     if (habit) {
       axios
         .delete(`${API_URL}/habits/${habit.id}`)

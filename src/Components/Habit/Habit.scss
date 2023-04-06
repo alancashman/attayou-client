@@ -1,3 +1,5 @@
+@use "../../styles/partials/variables" as *;
+
 .habit {
   display: flex;
 
@@ -13,7 +15,7 @@
     margin-left: 2rem;
 
     &--done {
-      background-color: rgb(156, 222, 156);
+      background-color: $color-green;
     }
 
     &--notdone {

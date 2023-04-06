@@ -1,4 +1,3 @@
-import { v4 as uuid } from "uuid";
 import { useState } from "react";
 import axios from "axios";
 import "./NewHabit.scss";
@@ -38,17 +37,24 @@ export default function NewHabit({ setHabits, habits }) {
           date: new Date(Date.now()).toISOString().slice(0, 10),
           done: false,
         },
-        id: uuid(),
+        // id: uuid(),
         user_id: 1,
       };
-      setHabits(() => {
-        return (habits = [...habits, habit]);
-      });
+      // setHabits((prevHabits) => {
+      //   return [...prevHabits, habit];
+      // });
+      // setHabits(() => {
+      //   return (habits = [...habits, habit]);
+      // });
       axios
         .post(`${API_URL}/habits`, habit)
         .then((res) => {
+          console.log("res.data: ", res.data);
           setNewHabit("");
           setShowForm((showForm) => false);
+          setHabits((prevHabits) => {
+            return [...prevHabits, res.data];
+          });
         })
         .catch((err) => {
           console.error(err);

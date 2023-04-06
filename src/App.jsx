@@ -1,15 +1,15 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.scss";
-import Welcome from "./Components/Welcome/Welcome";
-import Habits from "./Components/Habits/Habits";
+import WelcomePage from "./Pages/WelcomePage";
+import HabitsPage from "./Pages/HabitsPage";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Welcome />}></Route>
-        <Route path="/habits" element={<Habits />}></Route>
+        <Route path="/" element={<WelcomePage />}></Route>
+        <Route path="/habits" element={<HabitsPage />}></Route>
       </Routes>
     </BrowserRouter>
   );
