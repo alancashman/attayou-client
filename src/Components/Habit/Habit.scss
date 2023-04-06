@@ -1,0 +1,23 @@
+.habit {
+  display: flex;
+
+  &__subheading {
+    padding: 0 2rem;
+  }
+
+  &__cell {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.25rem;
+    padding: 0 2rem;
+    margin-left: 2rem;
+
+    &--done {
+      background-color: rgb(156, 222, 156);
+    }
+
+    &--notdone {
+      background-color: #eeeeee;
+    }
+  }
+}

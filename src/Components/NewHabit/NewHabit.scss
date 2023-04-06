@@ -1,0 +1,12 @@
+.new-habit {
+  display: flex;
+
+  &__input {
+    padding: 0.5rem;
+    width: 10rem;
+    font-size: 0.875rem;
+    &--error {
+      border: 2px solid red;
+    }
+  }
+}

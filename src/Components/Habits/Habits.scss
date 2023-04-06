@@ -1,0 +1,34 @@
+.calendar {
+  width: 100%;
+  // height: 100%;
+}
+
+.habits {
+  &__tracker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40%;
+  }
+
+  &-container {
+    display: flex;
+    flex-direction: column;
+    padding-left: 2rem;
+  }
+
+  &__calendar {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__heading {
+    padding: 0 2rem;
+  }
+
+  &__subheading {
+    height: 2rem;
+    border: 1px solid grey;
+    padding: 0 2rem;
+  }
+}
