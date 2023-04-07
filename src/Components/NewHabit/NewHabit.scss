@@ -2,11 +2,21 @@
   display: flex;
 
   &__input {
-    padding: 0.5rem;
+    padding: 0 0.5rem;
+    margin-left: 1rem;
     width: 10rem;
     font-size: 0.875rem;
+
     &--error {
       border: 2px solid red;
     }
+  }
+
+  &__add-btn {
+    margin-left: 1rem;
+  }
+
+  &__btn {
+    margin-left: 1rem;
   }
 }

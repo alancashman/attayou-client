@@ -9,9 +9,8 @@ export default function NewHabit({ setHabits, habits }) {
   const [newHabit, setNewHabit] = useState("");
   const [newHabitInputClass, setNewHabitInputClass] =
     useState("new-habit__input");
-  const [newHabitPlaceholder, setNewHabitPlaceholder] = useState(
-    "Please enter the habit you'd like to track."
-  );
+  const [newHabitPlaceholder, setNewHabitPlaceholder] =
+    useState("Enter a habit...");
   // Show form on button click
   function addNewHandler() {
     setShowForm((showForm) => !showForm);
@@ -37,15 +36,9 @@ export default function NewHabit({ setHabits, habits }) {
           date: new Date(Date.now()).toISOString().slice(0, 10),
           done: false,
         },
-        // id: uuid(),
         user_id: 1,
       };
-      // setHabits((prevHabits) => {
-      //   return [...prevHabits, habit];
-      // });
-      // setHabits(() => {
-      //   return (habits = [...habits, habit]);
-      // });
+
       axios
         .post(`${API_URL}/habits`, habit)
         .then((res) => {
@@ -64,9 +57,6 @@ export default function NewHabit({ setHabits, habits }) {
 
   return (
     <div className="new-habit">
-      <button className="new-habit__add-btn" onClick={addNewHandler}>
-        + Add New
-      </button>
       {showForm && (
         <form action="submit" className="new-habit__form" onSubmit={postHabit}>
           <input
@@ -82,6 +72,9 @@ export default function NewHabit({ setHabits, habits }) {
           </button>
         </form>
       )}
+      <button className="new-habit__add-btn" onClick={addNewHandler}>
+        + Add New
+      </button>
     </div>
   );
 }

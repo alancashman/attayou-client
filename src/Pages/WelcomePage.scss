@@ -8,11 +8,18 @@
   height: 100vh;
   width: 100vw;
   //   background-color: $color-primary;
-  background-image: linear-gradient(to right, $color-primary, $color-light);
+  background-image: linear-gradient(
+    to bottom left,
+    $color-primary,
+    $color-light
+  );
 
   &__heading {
     font-size: 4rem;
     color: $color-dark;
+    letter-spacing: 0.3rem;
+    margin-bottom: 1rem;
+    text-decoration: underline;
   }
 
   &__form {

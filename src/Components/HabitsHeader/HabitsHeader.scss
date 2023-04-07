@@ -1,3 +1,13 @@
+@use "../../styles/partials/variables" as *;
+
 .habits__header {
   display: flex;
+  width: auto;
+  text-decoration: underline;
+}
+
+.habits__heading {
+  &--date {
+    margin-left: 10rem;
+  }
 }
