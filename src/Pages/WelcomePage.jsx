@@ -37,13 +37,13 @@ export default function WelcomePage() {
           <h3 className="welcome__subheading">Welcome! Please log in...</h3>
           <input
             type="text"
-            placeholder={usernamePlaceholder}
+            placeholder="Username"
             name="user"
             className={usernameClass}
             onChange={handleUserChange}
           />
           <label htmlFor="user" className="welcome__label">
-            Username
+            {usernamePlaceholder}
           </label>
           <input
             type="password"

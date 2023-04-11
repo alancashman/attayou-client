@@ -27,7 +27,7 @@ export default function NewHabit({ setHabits, habits }) {
     e.preventDefault();
     if (!newHabit) {
       setNewHabitInputClass("new-habit__input new-habit__input--error");
-      setNewHabitPlaceholder("Please enter a new habit.");
+      setNewHabitPlaceholder("Please enter a habit you wish to track.");
       return;
     } else {
       const habit = {
@@ -67,14 +67,26 @@ export default function NewHabit({ setHabits, habits }) {
             value={newHabit}
             onChange={handleNewHabitChange}
           />
-          <button className="new-habit__btn new-habit__btn--submit">
-            Submit
-          </button>
+          <div className="new-habit__btns">
+            <button className="new-habit__btn new-habit__btn--submit">
+              Submit
+            </button>
+            {showForm && (
+              <button
+                className="new-habit__btn new-habit__btn--cancel"
+                onClick={addNewHandler}
+              >
+                Cancel
+              </button>
+            )}
+          </div>
         </form>
       )}
-      <button className="new-habit__add-btn" onClick={addNewHandler}>
-        + Add New
-      </button>
+      {showForm || (
+        <button className="new-habit__add-btn" onClick={addNewHandler}>
+          + Add New
+        </button>
+      )}
     </div>
   );
 }

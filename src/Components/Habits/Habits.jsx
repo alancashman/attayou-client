@@ -1,7 +1,7 @@
 import axios from "axios";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import { CircularProgressbar } from "react-circular-progressbar";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { useState, useEffect } from "react";
 
@@ -13,9 +13,9 @@ import "./Habits.scss";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-function Habits() {
+function Habits({ habits, setHabits, dates, setDates }) {
   const [date, setDate] = useState(new Date(Date.now()));
-  const [habits, setHabits] = useState([]);
+
   const [percentage, setPercentage] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const [deleteId, setDeleteId] = useState("");
@@ -38,6 +38,18 @@ function Habits() {
     setPercentage(0);
   }, []);
 
+  function getDates(habits) {
+    const datesArray = habits.map((habit) =>
+      habit.history.map((item) => item.date)
+    );
+    const flattenedDates = datesArray.reduce((acc, val) => acc.concat(val), []);
+    const uniqueDates = Array.from(new Set(flattenedDates));
+    uniqueDates.sort((a, b) => new Date(a) - new Date(b));
+    console.log(uniqueDates);
+    setDates(uniqueDates);
+    return uniqueDates;
+  }
+
   function formatDate(date) {
     return date.toISOString().slice(0, 10);
   }
@@ -51,6 +63,9 @@ function Habits() {
       .get(`${API_URL}/habits`)
       .then((res) => {
         setHabits(res.data);
+        getDates(res.data);
+
+        console.log(res.data);
       })
       .catch((err) => {
         console.error(err);
@@ -88,15 +103,13 @@ function Habits() {
 
   return (
     <section className="habits__section">
-      <Calendar
-        value={date}
-        onChange={onCalendarChange}
-        className="calendar"
-        calendarType="US"
-      />
       <div className="habits__subsection">
         <div className="habits__tracker">
-          <HabitsHeader date={date} />
+          <HabitsHeader
+            date={date}
+            formattedDate={formattedDate}
+            formatDate={formatDate}
+          />
           {habits.length > 0 &&
             habits.map((habit) => {
               return (
@@ -116,13 +129,25 @@ function Habits() {
 
           <NewHabit habits={habits} setHabits={setHabits} />
         </div>
-        <div className="habits__progress-bar">
-          <h3 className="habits__progress-heading">Today's Progress</h3>
-          <CircularProgressbar
-            className="progress-bar"
-            value={percentage}
-            text={`${percentage}%`}
+        <div className="habits__visuals">
+          <Calendar
+            value={date}
+            onChange={onCalendarChange}
+            className="calendar"
+            calendarType="US"
           />
+          <div className="habits__progress-bar">
+            <h3 className="habits__progress-heading">Today's Progress</h3>
+            <CircularProgressbar
+              className="progress-bar"
+              value={percentage}
+              text={`${percentage}%`}
+              styles={buildStyles({
+                pathColor: "rgb(156, 222, 156)",
+                textColor: "rgb(156,222,156)",
+              })}
+            />
+          </div>
         </div>
       </div>
       {showModal && (

@@ -1,7 +1,6 @@
 import "./Habit.scss";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import deleteIcon from "../../assets/icons/delete_outline-24px.svg";
 
 export default function Habit({
   name,
@@ -49,7 +48,7 @@ export default function Habit({
         done: true,
       });
       // Set the class for the habit to its inverse
-      setDoneStatus(!doneStatus);
+      setDoneStatus(() => !doneStatus);
     }
     axios
       .put(`${API_URL}/habits/${habit.id}`, habit)
@@ -60,22 +59,6 @@ export default function Habit({
       .catch((err) => {
         console.error(err);
       });
-  }
-
-  function deleteHandler() {
-    const habit = habits.find((habit) => habit.id === id);
-    console.log("habit: ", habit);
-    if (habit) {
-      axios
-        .delete(`${API_URL}/habits/${habit.id}`)
-        .then((res) => {
-          console.log(res);
-          getHabits();
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    }
   }
 
   function deleteClickHandler() {

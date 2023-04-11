@@ -1,13 +1,18 @@
 import "./Nav.scss";
 // import { Link } from "react-router-dom";
 import avatar from "../../assets/images/avatar.jpg";
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-export default function Nav() {
-  const [active, setActive] = useState("Dashboard");
+export default function Nav({ active, setActive }) {
+  const navigate = useNavigate();
+
+  function handleLogout() {
+    navigate("/");
+  }
 
   return (
     <nav className="nav">
+      <h1 className="nav__main-heading">Attayou</h1>
       <div className="nav__user-container">
         <img src={avatar} alt="" className="nav__avatar" />
         <div className="nav__user-details">
@@ -20,7 +25,10 @@ export default function Nav() {
           className={
             active === "Dashboard" ? "nav__link nav__link--active" : "nav__link"
           }
-          onClick={() => setActive("Dashboard")}
+          onClick={() => {
+            setActive(() => "Dashboard");
+            navigate("/habits");
+          }}
         >
           Dashboard
         </li>
@@ -28,9 +36,15 @@ export default function Nav() {
           className={
             active === "Trends" ? "nav__link nav__link--active" : "nav__link"
           }
-          onClick={() => setActive("Trends")}
+          onClick={() => {
+            setActive(() => "Trends");
+            navigate("/trends");
+          }}
         >
           Trends
+        </li>
+        <li className="nav__link nav__link--logout" onClick={handleLogout}>
+          Logout
         </li>
       </ul>
     </nav>

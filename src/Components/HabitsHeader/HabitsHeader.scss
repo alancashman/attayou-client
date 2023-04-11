@@ -3,11 +3,15 @@
 .habits__header {
   display: flex;
   width: auto;
-  text-decoration: underline;
+  // text-decoration: underline;
+  border-bottom: 1px solid $color-dark;
 }
 
 .habits__heading {
+  // background-color: white;
+  border-radius: 4px;
+
   &--date {
-    margin-left: 10rem;
+    margin-left: 12rem;
   }
 }
