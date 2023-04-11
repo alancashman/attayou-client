@@ -1,5 +1,6 @@
 import Habits from "../Components/Habits/Habits";
 import Nav from "../Components/Nav/Nav";
+import Orb from "../Components/Orb/Orb";
 import "./HabitsPage.scss";
 
 export default function HabitsPage({
@@ -12,6 +13,7 @@ export default function HabitsPage({
 }) {
   return (
     <main className="habits">
+      {/* <Orb /> */}
       <Nav active={active} setActive={setActive} />
 
       <Habits

@@ -9,9 +9,11 @@
   background-color: #eee;
   color: $color-primary;
   border-radius: 1rem;
+  z-index: 1;
 
   &__main-heading {
     margin-bottom: 2rem;
+    text-decoration: underline;
   }
 
   &__user-container {

@@ -4,7 +4,9 @@
   display: flex;
   width: auto;
   // text-decoration: underline;
-  border-bottom: 1px solid $color-dark;
+  border-bottom: 2px solid $color-primary;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .habits__heading {
@@ -12,6 +14,6 @@
   border-radius: 4px;
 
   &--date {
-    margin-left: 12rem;
+    margin-left: auto;
   }
 }

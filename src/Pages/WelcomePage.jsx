@@ -4,6 +4,7 @@ import { useState } from "react";
 
 export default function WelcomePage() {
   const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [usernameClass, setUsernameClass] = useState(
     "welcome__input welcome__user-input"
   );
@@ -12,7 +13,7 @@ export default function WelcomePage() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (username !== "Alan") {
+    if (username !== "Alan" || password === "") {
       setUsernameClass(
         "welcome__input welcome__user-input welcome__user-input--invalid"
       );
@@ -26,6 +27,10 @@ export default function WelcomePage() {
     setUsername(e.target.value);
     setUsernameClass("welcome__input welcome__user-input");
     setUsernamePlaceholder("Username");
+  }
+
+  function handlePasswordChange(e) {
+    setPassword(e.target.value);
   }
 
   //   function handle
@@ -50,6 +55,7 @@ export default function WelcomePage() {
             placeholder="Password"
             name="password"
             className="welcome__input"
+            onChange={handlePasswordChange}
           />
           <label htmlFor="password" className="welcome__label">
             Password

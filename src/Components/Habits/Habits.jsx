@@ -119,6 +119,7 @@ function Habits({ habits, setHabits, dates, setDates }) {
                   name={habit.name}
                   done={getDoneValue(habit, formattedDate)}
                   habits={habits}
+                  description={habit.description}
                   formattedDate={formattedDate}
                   getHabits={getHabits}
                   setShowModal={setShowModal}

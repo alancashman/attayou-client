@@ -7,6 +7,7 @@ const API_URL = process.env.REACT_APP_API_URL;
 export default function NewHabit({ setHabits, habits }) {
   const [showForm, setShowForm] = useState(false);
   const [newHabit, setNewHabit] = useState("");
+  const [newHabitDescription, setNewHabitDescription] = useState("");
   const [newHabitInputClass, setNewHabitInputClass] =
     useState("new-habit__input");
   const [newHabitPlaceholder, setNewHabitPlaceholder] =
@@ -19,6 +20,11 @@ export default function NewHabit({ setHabits, habits }) {
   // Control loop for newHabit input
   function handleNewHabitChange(e) {
     setNewHabit(e.target.value);
+    setNewHabitInputClass("new-habit__input");
+  }
+
+  function handleNewDescriptionChange(e) {
+    setNewHabitDescription(e.target.value);
     setNewHabitInputClass("new-habit__input");
   }
 
@@ -36,6 +42,7 @@ export default function NewHabit({ setHabits, habits }) {
           date: new Date(Date.now()).toISOString().slice(0, 10),
           done: false,
         },
+        description: newHabitDescription,
         user_id: 1,
       };
 
@@ -44,6 +51,7 @@ export default function NewHabit({ setHabits, habits }) {
         .then((res) => {
           console.log("res.data: ", res.data);
           setNewHabit("");
+          setNewHabitDescription("");
           setShowForm((showForm) => false);
           setHabits((prevHabits) => {
             return [...prevHabits, res.data];
@@ -59,13 +67,24 @@ export default function NewHabit({ setHabits, habits }) {
     <div className="new-habit">
       {showForm && (
         <form action="submit" className="new-habit__form" onSubmit={postHabit}>
+          <h5 className="new-habit__heading">Add New Habit</h5>
           <input
             type="text"
+            name="name"
             id="habitName"
             placeholder={newHabitPlaceholder}
             className={newHabitInputClass}
             value={newHabit}
             onChange={handleNewHabitChange}
+          />
+          <input
+            type="text"
+            name="description"
+            id="habitDescription"
+            placeholder="(Optional) Enter a description..."
+            value={newHabitDescription}
+            className={newHabitInputClass}
+            onChange={handleNewDescriptionChange}
           />
           <div className="new-habit__btns">
             <button className="new-habit__btn new-habit__btn--submit">

@@ -25,7 +25,7 @@ ChartJS.register(
 
 export default function TrendsPage({ active, setActive, dates, percentages }) {
   const data = {
-    labels: dates,
+    labels: dates.map((date) => date.slice(5, 10)),
     datasets: [
       {
         labels: "Habits",

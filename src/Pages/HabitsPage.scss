@@ -1,5 +1,5 @@
 @use "../styles/partials/variables" as *;
 .habits {
-  display: flex;
   background-image: linear-gradient(to top right, $color-light, #fff);
+  //   margin: -1rem 0;
 }

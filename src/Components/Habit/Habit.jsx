@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 export default function Habit({
   name,
   done,
+  description,
   id,
   habits,
   formattedDate,
@@ -68,7 +69,10 @@ export default function Habit({
 
   return (
     <div className="habit">
-      <h5 className="habit__subheading">{name}</h5>
+      <div className="habit__text">
+        <h5 className="habit__subheading">{name}</h5>
+        <p className="habit__description">{description}</p>
+      </div>
       <button className="habit__delete-btn" onClick={deleteClickHandler}>
         🗑
       </button>

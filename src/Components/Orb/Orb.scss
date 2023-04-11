@@ -1,0 +1,25 @@
+@use "../../styles/partials/variables" as *;
+
+.orb {
+  width: 70vw;
+  height: 70vh;
+  position: absolute;
+  border-radius: 50%;
+  margin-left: auto;
+  margin-top: auto;
+  background: linear-gradient(180deg, $color-dark 0%, $color-light 100%);
+  filter: blur(300px);
+  animation: moveOrb 15s alternate linear infinite;
+
+  @keyframes moveOrb {
+    0% {
+      transform: translate(0, 0);
+    }
+    50% {
+      transform: translate(800px, 500px);
+    }
+    100% {
+      transform: translate(0, 0);
+    }
+  }
+}

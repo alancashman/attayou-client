@@ -1,18 +1,28 @@
 @use "../../styles/partials/variables" as *;
 
 .new-habit {
-  // display: flex;
+  display: flex;
+  // margin: 0;
+  // padding: 0;
+
+  &__heading {
+    margin-left: 1rem;
+    text-decoration: underline;
+  }
 
   &__form {
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
+    margin-top: 1rem;
+    margin-left: 1rem;
     gap: 1rem;
   }
 
   &__input {
     padding: 0 0.5rem;
     margin-left: 1rem;
-    margin-top: 1rem;
+    // margin-top: 1rem;
     width: 17.5rem;
     font-size: 0.875rem;
 
@@ -27,6 +37,7 @@
     border-radius: 1rem;
     cursor: pointer;
     border: 1px solid transparent;
+    box-shadow: 1px 1px 4px $color-primary;
 
     &:hover {
       background-color: $color-dark;
