@@ -54,7 +54,7 @@ export default function NewHabit({ setHabits, habits }) {
           setNewHabitDescription("");
           setShowForm((showForm) => false);
           setHabits((prevHabits) => {
-            return [...prevHabits, res.data];
+            return [...prevHabits, JSON.parse(res.data)];
           });
         })
         .catch((err) => {
@@ -76,6 +76,7 @@ export default function NewHabit({ setHabits, habits }) {
             className={newHabitInputClass}
             value={newHabit}
             onChange={handleNewHabitChange}
+            maxLength={35}
           />
           <input
             type="text"
@@ -85,6 +86,7 @@ export default function NewHabit({ setHabits, habits }) {
             value={newHabitDescription}
             className={newHabitInputClass}
             onChange={handleNewDescriptionChange}
+            maxLength={40}
           />
           <div className="new-habit__btns">
             <button className="new-habit__btn new-habit__btn--submit">

@@ -8,16 +8,26 @@ export default function WelcomePage() {
   const [usernameClass, setUsernameClass] = useState(
     "welcome__input welcome__user-input"
   );
+  const [passwordClass, setPasswordClass] = useState(
+    "welcome__input welcome__user-input"
+  );
   const [usernamePlaceholder, setUsernamePlaceholder] = useState("Username");
+  const [passwordPlaceholder, setPasswordPlaceholder] = useState("Password");
   const navigate = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (username !== "Alan" || password === "") {
+    if (username !== "Alan") {
       setUsernameClass(
         "welcome__input welcome__user-input welcome__user-input--invalid"
       );
       setUsernamePlaceholder(`We couldn't find that user`);
+      return;
+    } else if (password === "") {
+      setPasswordClass(
+        "welcome__input welcome__user-input welcome__user-input--invalid"
+      );
+      setPasswordPlaceholder("Please input a password");
       return;
     }
     navigate("/habits");
@@ -31,6 +41,8 @@ export default function WelcomePage() {
 
   function handlePasswordChange(e) {
     setPassword(e.target.value);
+    setPasswordClass("welcome__input welcome__user-input");
+    setPasswordPlaceholder("Password");
   }
 
   //   function handle
@@ -54,11 +66,11 @@ export default function WelcomePage() {
             type="password"
             placeholder="Password"
             name="password"
-            className="welcome__input"
+            className={passwordClass}
             onChange={handlePasswordChange}
           />
           <label htmlFor="password" className="welcome__label">
-            Password
+            {passwordPlaceholder}
           </label>
           <button className="welcome__button">Login</button>
         </form>

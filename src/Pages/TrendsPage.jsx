@@ -40,6 +40,8 @@ export default function TrendsPage({ active, setActive, dates, percentages }) {
   const options = {
     responsive: true,
     maintainAspectRatio: false,
+    clip: false,
+
     plugins: {
       legend: { display: false },
       title: { display: true, text: "Habit Completion Over Time" },
