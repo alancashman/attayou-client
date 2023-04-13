@@ -1,3 +1,19 @@
+@use "../../styles/partials/variables" as *;
+
 .habits__header {
   display: flex;
+  width: auto;
+  // text-decoration: underline;
+  border-bottom: 2px solid $color-primary;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.habits__heading {
+  // background-color: white;
+  border-radius: 4px;
+
+  &--date {
+    margin-left: auto;
+  }
 }

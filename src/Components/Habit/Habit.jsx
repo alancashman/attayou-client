@@ -5,10 +5,13 @@ import { useState, useEffect } from "react";
 export default function Habit({
   name,
   done,
+  description,
   id,
   habits,
   formattedDate,
   getHabits,
+  setShowModal,
+  setDeleteId,
 }) {
   const API_URL = process.env.REACT_APP_API_URL;
   const [doneStatus, setDoneStatus] = useState(done);
@@ -46,46 +49,39 @@ export default function Habit({
         done: true,
       });
       // Set the class for the habit to its inverse
-      setDoneStatus(!doneStatus);
+      setDoneStatus(() => !doneStatus);
     }
     axios
       .put(`${API_URL}/habits/${habit.id}`, habit)
       .then((res) => {
         console.log(res.data);
+        getHabits();
       })
       .catch((err) => {
         console.error(err);
       });
   }
 
-  function deleteHandler() {
-    const habit = habits.find((habit) => habit.id === id);
-    console.log(habit);
-    if (habit) {
-      axios
-        .delete(`${API_URL}/habits/${habit.id}`)
-        .then((res) => {
-          console.log(res);
-          getHabits();
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    }
+  function deleteClickHandler() {
+    setDeleteId(id);
+    setShowModal(true);
   }
 
   return (
     <div className="habit">
-      <h5 className="habit__subheading">{name}</h5>
+      <div className="habit__text">
+        <h5 className="habit__subheading">{name}</h5>
+        <p className="habit__description">{description}</p>
+      </div>
+      <button className="habit__delete-btn" onClick={deleteClickHandler}>
+        🗑
+      </button>
       <button
         className={doneStatusClass}
         // className="habit__cell habit__cell--done"
         onClick={putHandler}
         id={id}
       ></button>
-      <button className="habit__delete-btn" onClick={deleteHandler}>
-        X
-      </button>
     </div>
   );
 }
