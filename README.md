@@ -1,6 +1,20 @@
-# Getting Started with Create React App and Redux
+# ATTAYOU
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+Attayou is a modern, elegant habit tracker app that enables users to track their behaviors as they attempt to foster new good habits or abstain from bad habits.  Users can input custom behaviors they want to track and log their successes over time using a calendar.  Employs a second repo for the backend available at https://github.com/alancashman/attayou-server.  
+
+## FUNCTIONS
+
+Users must login to access the dashboard view; for demo purposes, use the username 'Alan' and the password 'asdf'.
+
+Users can click the cells corresponding to habits to send a PUT request to the backend to update the 'done' status of the habit for that particular day.  
+
+Users can input their own custom habits to be tracked using the "+ Add New" button to send a POST request to add a new habit to the habits array.
+
+Users can delete habits they no longer wish to track by clicking the trash icon adjacent to the habit in question.  This will send a DELETE request to the backend to remove the habit from the habits array.
+
+Users can set the date by clicking the calendar to pull up the habits completion status for the chosen day.  Progress for the chosen day can be visualized by the progress bar located below the calendar.  
+
+The 'Trends' tab on the navigation can be selected to visualize the user's completion progress over time for the days since the user has begun tracking habits.  The chart automatically updates as the data on the backend does.  
 
 ## Available Scripts
 
@@ -8,39 +22,6 @@ In the project directory, you can run:
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Runs the app in the development mode.  Must also run 'npm start' on the backend in order to have data to access.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
