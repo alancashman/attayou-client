@@ -6,6 +6,8 @@ Attayou is a modern, elegant habit tracker app that enables users to track their
 
 Users must login to access the dashboard view; for demo purposes, use the username 'Alan' and the password 'asdf'.
 
+![dashboard-view](./screenshots/screenshot-1.png)
+
 Users can click the cells corresponding to habits to send a PUT request to the backend to update the 'done' status of the habit for that particular day.  
 
 Users can input their own custom habits to be tracked using the "+ Add New" button to send a POST request to add a new habit to the habits array.
@@ -15,6 +17,8 @@ Users can delete habits they no longer wish to track by clicking the trash icon 
 Users can set the date by clicking the calendar to pull up the habits completion status for the chosen day.  Progress for the chosen day can be visualized by the progress bar located below the calendar.  
 
 The 'Trends' tab on the navigation can be selected to visualize the user's completion progress over time for the days since the user has begun tracking habits.  The chart automatically updates as the data on the backend does.  
+
+![trends-view](./screenshots/screenshot-2.png)
 
 ## Available Scripts
 
