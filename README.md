@@ -2,7 +2,7 @@
 
 Attayou is a modern, elegant habit tracker app that enables users to track their behaviors as they attempt to foster new good habits or abstain from bad habits.  Users can input custom behaviors they want to track and log their successes over time using a calendar.  Employs a second repo for the backend available at https://github.com/alancashman/attayou-server.  
 
-## FUNCTIONS
+## Functions
 
 Users must login to access the dashboard view; for demo purposes, use the username 'Alan' and the password 'asdf'.
 
