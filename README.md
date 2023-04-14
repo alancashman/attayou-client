@@ -20,9 +20,13 @@ The 'Trends' tab on the navigation can be selected to visualize the user's compl
 
 ![trends-view](./screenshots/screenshot-2.png)
 
+## .env Contents
+
+REACT_APP_API_URL variable using http://localhost:<port> as its value.  
+
 ## Tech Stack
 
-React frontend using SCSS for styling.  Backend run via node.js using reading and writing to a JSON file for data.  Libraries employed: [React Circular Progress Bar](https://www.npmjs.com/package/react-circular-progressbar), [React Chart JS](https://react-chartjs-2.js.org/), [React Calendar](https://react-chartjs-2.js.org/).
+React frontend using SCSS for styling.  Backend run via node.js reading and writing to a JSON file for data.  Libraries employed: [React Circular Progress Bar](https://www.npmjs.com/package/react-circular-progressbar), [React Chart JS](https://react-chartjs-2.js.org/), [React Calendar](https://react-chartjs-2.js.org/).
 
 ## Available Scripts
 
