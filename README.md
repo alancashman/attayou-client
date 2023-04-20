@@ -22,7 +22,7 @@ The 'Trends' tab on the navigation can be selected to visualize the user's compl
 
 ## .env Contents
 
-REACT_APP_API_URL variable using http://localhost:<port> as its value.  
+REACT_APP_API_URL variable using http://localhost:[port] as its value.  
 
 ## Tech Stack
 
