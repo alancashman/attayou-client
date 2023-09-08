@@ -54,7 +54,7 @@ export default function NewHabit({ setHabits, habits }) {
           setNewHabitDescription("");
           setShowForm((showForm) => false);
           setHabits((prevHabits) => {
-            return [...prevHabits, JSON.parse(res.data)];
+            return [...prevHabits, res.data];
           });
         })
         .catch((err) => {

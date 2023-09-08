@@ -15,51 +15,70 @@ export default function Habit({
 }) {
   const API_URL = process.env.REACT_APP_API_URL;
   const [doneStatus, setDoneStatus] = useState(done);
+  const [history, setHistory] = useState([]);
 
   // Set done status (class) for each habit
   useEffect(() => {
-    setDoneStatus(done);
-  }, [done, habits, formattedDate]);
+    getHistory();
+  }, []);
+
+  useEffect(() => {
+    let hasDoneEntry = false;
+    history.forEach((historyObj) => {
+      if (historyObj.date === formattedDate && historyObj.done) {
+        hasDoneEntry = true;
+      }
+    });
+
+    setDoneStatus(hasDoneEntry);
+  }, [history, formattedDate]);
+
+  function getHistory() {
+    axios
+      .get(`${API_URL}/habits/${id}`)
+      .then((response) => {
+        setHistory(response.data);
+      })
+      .catch((err) => {
+        console.error(`Error setting history, ${err}`);
+      });
+  }
 
   // Determine done status (class) to output in className
   const doneStatusClass = doneStatus
     ? "habit__cell habit__cell--done"
     : "habit__cell habit__cell--notdone";
 
-  function putHandler() {
-    // Find habit in habits array
-    const habit = habits.find((habit) => habit.id === id);
-    // Find element in history array for today's date
-    const dateObj = habit.history.find((habit) => habit.date === formattedDate);
-    // If element is found,
-    if (dateObj) {
-      // Find the index for the element
-      const foundIndex = habit.history.findIndex(
-        (instance) => instance.date === formattedDate
-      );
-      // Update the done property to its inverse
-      habit.history[foundIndex].done = !habit.history[foundIndex].done;
-      // Set the class for the habit to its inverse
-      setDoneStatus(!doneStatus);
-      // Else,
+  function adjustHistory() {
+    const updatedDoneStatus = !doneStatus;
+    setDoneStatus(updatedDoneStatus);
+    console.log("History: ", history);
+    const today = history.find(
+      (historyObj) => historyObj.date === formattedDate
+    );
+    console.log("Today:", today);
+    if (!today) {
+      axios
+        .post(`${API_URL}/habits/${id}`, {
+          habit_id: id,
+          date: formattedDate,
+          done: true,
+        })
+        .then((response) => {
+          console.log(response.data);
+        });
     } else {
-      // Add a new element to the history array for today's date, setting done = true
-      habit.history.push({
-        date: formattedDate,
-        done: true,
-      });
-      // Set the class for the habit to its inverse
-      setDoneStatus(() => !doneStatus);
+      axios
+        .put(`${API_URL}/habits/${id}`, {
+          habit_id: id,
+          date: formattedDate,
+          done: updatedDoneStatus,
+        })
+        .then((response) => {
+          console.log(response.data);
+        });
     }
-    axios
-      .put(`${API_URL}/habits/${habit.id}`, habit)
-      .then((res) => {
-        console.log(res.data);
-        getHabits();
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    getHabits();
   }
 
   function deleteClickHandler() {
@@ -78,8 +97,7 @@ export default function Habit({
       </button>
       <button
         className={doneStatusClass}
-        // className="habit__cell habit__cell--done"
-        onClick={putHandler}
+        onClick={adjustHistory}
         id={id}
       ></button>
     </div>

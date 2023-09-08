@@ -10,6 +10,7 @@ export default function HabitsPage({
   setActive,
   dates,
   setDates,
+
 }) {
   return (
     <main className="habits">
@@ -21,6 +22,7 @@ export default function HabitsPage({
         dates={dates}
         habits={habits}
         setHabits={setHabits}
+
       />
     </main>
   );

@@ -8,7 +8,6 @@ export default function HabitsHeader({ date, formatDate, formattedDate }) {
         {formatDate(new Date()) === formattedDate
           ? "Today"
           : date.toLocaleDateString("en-us")}
-        {/* {date.toLocaleDateString("en-us")} */}
       </h3>
     </div>
   );

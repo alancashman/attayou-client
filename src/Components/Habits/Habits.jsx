@@ -19,35 +19,32 @@ function Habits({ habits, setHabits, dates, setDates }) {
   const [percentage, setPercentage] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const [deleteId, setDeleteId] = useState("");
-
-  const formattedDate = formatDate(date);
-
-  const completedHabits = habits.filter((habit) => {
-    const today = habit.history.find((data) => {
-      return data.date === formattedDate && data.done;
-    });
-    return today ? today : false;
-  });
-
-  useEffect(() => {
-    setPercentage(Math.floor((completedHabits.length / habits.length) * 100));
-  }, [completedHabits, habits, formattedDate]);
+  const [formattedDate, setFormattedDate] = useState(formatDate(date));
 
   useEffect(() => {
     getHabits();
+    getDates();
     setPercentage(0);
   }, []);
 
-  function getDates(habits) {
-    const datesArray = habits.map((habit) =>
-      habit.history.map((item) => item.date)
-    );
-    const flattenedDates = datesArray.reduce((acc, val) => acc.concat(val), []);
-    const uniqueDates = Array.from(new Set(flattenedDates));
-    uniqueDates.sort((a, b) => new Date(a) - new Date(b));
-    console.log(uniqueDates);
-    setDates(uniqueDates);
-    return uniqueDates;
+  useEffect(() => {
+    getDailyCompletion();
+  }, [habits]);
+
+  useEffect(() => {
+    setFormattedDate(formatDate(date));
+  }, [date]);
+
+  function getDates() {
+    axios.get(`${API_URL}/habits/history`).then((res) => {
+      const habits = res.data;
+      const datesArray = habits.map((item) => item.date);
+      const uniqueDates = Array.from(new Set(datesArray));
+      console.log(`Unique dates: `, uniqueDates);
+      uniqueDates.sort((a, b) => new Date(a) - new Date(b));
+      setDates(uniqueDates);
+      return uniqueDates;
+    });
   }
 
   function formatDate(date) {
@@ -56,6 +53,16 @@ function Habits({ habits, setHabits, dates, setDates }) {
 
   function onCalendarChange(newDate) {
     setDate(newDate);
+    getHabits();
+  }
+
+  function getDailyCompletion() {
+    axios.get(`${API_URL}/habits/history`).then((res) => {
+      const filteredHistory = res.data.filter((entry) => {
+        return entry.date === formattedDate && entry.done;
+      });
+      setPercentage(Math.round((filteredHistory.length / habits.length) * 100));
+    });
   }
 
   function getHabits() {
@@ -63,9 +70,6 @@ function Habits({ habits, setHabits, dates, setDates }) {
       .get(`${API_URL}/habits`)
       .then((res) => {
         setHabits(res.data);
-        getDates(res.data);
-
-        console.log(res.data);
       })
       .catch((err) => {
         console.error(err);
@@ -89,18 +93,6 @@ function Habits({ habits, setHabits, dates, setDates }) {
     }
   }
 
-  function getDoneValue(habit, formattedDate) {
-    if (habit.history.length > 0) {
-      const index = habit.history.findIndex(
-        (instance) => instance.date === formattedDate
-      );
-      if (index !== -1) {
-        return habit.history[index].done;
-      }
-    }
-    return false;
-  }
-
   return (
     <section className="habits__section">
       <div className="habits__subsection">
@@ -117,7 +109,7 @@ function Habits({ habits, setHabits, dates, setDates }) {
                   key={habit.id}
                   id={habit.id}
                   name={habit.name}
-                  done={getDoneValue(habit, formattedDate)}
+                  // done={getDoneValue(habit, formattedDate)}
                   habits={habits}
                   description={habit.description}
                   formattedDate={formattedDate}
